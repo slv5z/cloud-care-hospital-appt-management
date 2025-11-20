@@ -1,16 +1,17 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# MySQL connection credentials
-DB_HOST = "localhost"
-DB_USER = "hospital_app"
-DB_PASSWORD = "pass@123"
-DB_NAME = "hospital_db"
+# PostgreSQL connection credentials (use environment variables for deployment)
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_USER = os.getenv("DB_USER", "hospital_app")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "pass@123")
+DB_NAME = os.getenv("DB_NAME", "hospital_db")
+DB_PORT = os.getenv("DB_PORT", "5432")
 
-# SQLAlchemy database URL
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://hospital_app:pass%40123@localhost/hospital_db"
-
+# SQLAlchemy database URL for PostgreSQL
+SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # Create SQLAlchemy engine
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)

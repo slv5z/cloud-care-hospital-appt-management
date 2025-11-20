@@ -1,9 +1,7 @@
-# TODO: Fix Cancelled Appointments Display
+# TODO: Switch from MySQL to PostgreSQL for Render Deployment
 
-## Approved Plan
-Change patient cancellation logic to set appointment status to "Cancelled" instead of deleting the record, so that cancelled appointments appear in the "view cancelled appointments" page.
-
-## Steps
-- [x] Modify the `/patient/cancel_appointment` POST endpoint in main.py to update appointment status to "Cancelled" instead of deleting the record.
-- [x] Verify the change by checking the code and ensuring consistency with admin cancellation.
-- [x] Task completed: Patient cancellations now set status to "Cancelled", matching admin behavior.
+- [x] Update requirements.txt: Replace pymysql and mysql-connector-python with psycopg2-binary
+- [x] Update db.py: Change SQLALCHEMY_DATABASE_URL to PostgreSQL format using environment variables
+- [x] Install new dependencies
+- [x] Test the app locally (critical-path: app starts without errors)
+- [ ] Update environment variables on Render for PostgreSQL connection
