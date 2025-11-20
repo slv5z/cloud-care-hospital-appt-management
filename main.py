@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI, Request, Form, Depends, HTTPException
 from fastapi.responses import RedirectResponse ,  HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -15,13 +16,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 app.add_middleware(SessionMiddleware, secret_key="your-secret-key")
-# ---------------- DB Dependency ----------------
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+
 # ---------------- Role Dashboard ----------------
 @app.get("/")
 def role_dashboard(request: Request):
