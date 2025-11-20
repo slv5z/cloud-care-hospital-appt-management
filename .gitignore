@@ -24,8 +24,8 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Ignore static build files (if generated)
-static/
+static/__pycache__/
+static/*.tmp
 
 # If you ever add node stuff
 node_modules/
