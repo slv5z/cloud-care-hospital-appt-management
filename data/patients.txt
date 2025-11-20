@@ -1,0 +1,5 @@
+1,navya tyagi,19,Female,24-01-2006,9058797979,headache
+2,sparsh rana,18,Male,19-02-2007,1234567898,"cold,fever"
+3,saachi jaiswal,20,Female,04-02-2005,6543217098,toothache
+4,vedansh negi,67,Male,12-07-2006,5467668678,kamar dard
+5,reteyugevf,35,Female,25-09-1998,1234567890,jbvhfbvbfjbb  bfdbvhjdjb

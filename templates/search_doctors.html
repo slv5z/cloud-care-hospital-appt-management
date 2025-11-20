@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Doctors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white text-center">
+                <h3>Search Doctors</h3>
+            </div>
+
+            <div class="card-body">
+                <!-- Search Form -->
+                <form class="d-flex mb-3" method="get" action="/patient/search_doctors">
+                    <input type="text" 
+                           name="term" 
+                           class="form-control me-2" 
+                           placeholder="Enter doctor name or specialization..." 
+                           value="{{ request.query_params.get('term', '') }}" 
+                           required>
+                    <button type="submit" class="btn btn-success">Search</button>
+                </form>
+
+                <!-- Results Table -->
+                {% if doctors %}
+                <h5 class="text-center mb-3 text-secondary">
+                    Showing results for "<b>{{ request.query_params.get('term', '') }}</b>"
+                </h5>
+                <table class="table table-striped table-bordered text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Specialization</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for doctor in doctors %}
+                        <tr>
+                            <td>{{ doctor.id }}</td>
+                            <td>{{ doctor.name }}</td>
+                            <td>{{ doctor.specialization }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% elif request.query_params.get('term') %}
+                <div class="alert alert-warning text-center">
+                    No doctor records found for "<b>{{ request.query_params.get('term') }}</b>".
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

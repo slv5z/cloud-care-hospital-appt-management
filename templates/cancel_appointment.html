@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cancel Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            width: 400px;
+            margin: auto;
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #c62828;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="number"],
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        button {
+            background-color: #c62828;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            width: 85%;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+        .success {
+            text-align: center;
+            margin-top: 20px;
+            background: #e8f7ec;
+            color: #0a6629;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #c9eccf;
+        }
+        .back-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background-color: #6c757d;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            width: fit-content;
+            margin: 15px auto 0;
+        }
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Cancel Appointment</h2>
+
+        <!-- Dynamic form action from backend -->
+        <form method="POST" action="{{ form_action }}">
+            <input type="number" name="appointment_id" placeholder="Enter Appointment ID" required>
+
+            <!-- ✅ OTP only for patient module -->
+            {% if source == 'patient' %}
+            <input type="text" name="otp" placeholder="Enter 4-digit OTP" pattern="[0-9]{4}" required>
+            {% endif %}
+
+            <button type="submit">Cancel Appointment</button>
+        </form>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        {% if success %}
+            <div class="success">{{ success }}</div>
+        {% endif %}
+
+        <a href="{{ back_link }}" class="back-btn">← Back to Dashboard</a>
+    </div>
+</body>
+</html>

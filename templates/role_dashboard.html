@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management Dashboard</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 380px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .role-btn {
+            display: block;
+            width: 100%;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .role-btn:hover {
+            background: #2980b9;
+            transform: scale(1.03);
+        }
+
+        .exit-btn {
+            background: #e74c3c;
+        }
+
+        .exit-btn:hover {
+            background: #c0392b;
+        }
+
+        footer {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h1>🏥 Hospital Management System</h1>
+        <form method="POST" action="/select_role">
+            <button type="submit" class="role-btn" name="role" value="patient">👤 Patient</button>
+            <button type="submit" class="role-btn" name="role" value="doctor">👨‍⚕️ Doctor</button>
+            <button type="submit" class="role-btn" name="role" value="admin">🛡️ Admin</button>
+        </form>
+
+        <footer>© 2025 Hospital Management System</footer>
+    </div>
+</body>
+</html>

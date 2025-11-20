@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            padding: 40px;
+        }
+        .container {
+            width: 420px;
+            margin: auto;
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #2b8aef;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: #2b8aef;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn:hover {
+            background-color: #1a6edb;
+        }
+        .msg {
+            text-align: center;
+            margin-top: 12px;
+            color: #c62828;
+            font-weight: 500;
+        }
+        .success {
+            text-align: center;
+            margin-top: 12px;
+            background: #e8f7ec;
+            color: #0a6629;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #c9eccf;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>
+            {% if source == 'admin' %}
+                Admin: Book Appointment
+            {% else %}
+                Patient: Book Appointment
+            {% endif %}
+        </h2>
+
+        <!-- Dynamic form action based on source -->
+        <form method="POST" action="{% if source == 'admin' %}/admin/book_appointment{% else %}/patient/book_appointment{% endif %}">
+            <label for="patient_id">Patient ID:</label>
+            <input type="number" name="patient_id" id="patient_id" required>
+
+            <label for="doctor_id">Doctor ID:</label>
+            <input type="number" name="doctor_id" id="doctor_id" required>
+
+            <label for="appointment_date">Appointment Date:</label>
+            <input type="date" name="appointment_date" id="appointment_date" required>
+
+            <label for="appointment_time">Appointment Time:</label>
+            <input type="time" name="appointment_time" id="appointment_time" required>
+
+            <!-- OTP shown only for patient -->
+            {% if source == 'patient' %}
+                <label for="otp">Enter OTP (for verification):</label>
+                <input type="text" name="otp" id="otp" pattern="[0-9]{4}" placeholder="4-digit OTP" required>
+            {% endif %}
+
+            <button type="submit" class="btn">Book Appointment</button>
+        </form>
+
+        <!-- Message section -->
+        {% if message %}
+            <div class="msg">{{ message }}</div>
+        {% endif %}
+        {% if success %}
+            <div class="success">✅ {{ success }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>

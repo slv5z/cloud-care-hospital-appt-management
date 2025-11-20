@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Appointments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .no-data {
+            text-align: center;
+            color: #777;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Appointments</h2>
+
+        {% if appointments and appointments|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient ID</th>
+                    <th>Doctor ID</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appt in appointments %}
+                <tr>
+                    <td>{{ appt.id }}</td>
+                    <td>{{ appt.patient_id }}</td>
+                    <td>{{ appt.doctor_id }}</td>
+                    <td>{{ appt.appointment_date.strftime('%d-%m-%Y') if appt.appointment_date else '' }}</td>
+                    <td>
+                        {% if appt.appointment_time %}
+                            {% if appt.appointment_time.seconds is defined %}
+                                {{ '%02d:%02d'|format((appt.appointment_time.seconds // 3600), ((appt.appointment_time.seconds % 3600) // 60)) }}
+                            {% else %}
+                                {{ appt.appointment_time.strftime('%H:%M') }}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td>{{ appt.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p class="no-data">No appointments found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 85%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        button {
+            width: 90%;
+            padding: 10px;
+            background: #2980b9;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #1c5985;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .locked {
+            color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Admin Login</h2>
+        <!-- ✅ Changed the action to match your backend route -->
+        <form id="loginForm" method="POST" action="/admin/login">
+            <input type="text" name="username" id="username" placeholder="Enter Username" required><br>
+            <input type="password" name="password" id="password" placeholder="Enter Password" required><br>
+            <button type="submit" id="loginBtn">Login</button>
+        </form>
+
+        <p class="message" id="message">
+            {% if message %}{{ message }}{% endif %}
+        </p>
+    </div>
+
+    <script>
+        let attempts = 0;
+        const form = document.getElementById("loginForm");
+        const message = document.getElementById("message");
+        const loginBtn = document.getElementById("loginBtn");
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+
+        form.addEventListener("submit", (e) => {
+            const enteredUser = username.value.trim().toLowerCase();
+            const enteredPass = password.value.trim();
+
+            // ✅ Local client-side check (optional; backend will verify too)
+            if (enteredUser === "admin" && enteredPass === "pass123") {
+                message.textContent = "Login successful.";
+                message.className = "message success";
+                return; // Allow form submission to backend
+            } else {
+                e.preventDefault(); // Stop form submission
+                attempts++;
+                if (attempts >= 3) {
+                    message.textContent = "Too many failed attempts. Access denied.";
+                    message.className = "message locked";
+                    username.disabled = true;
+                    password.disabled = true;
+                    loginBtn.disabled = true;
+                    loginBtn.style.background = "gray";
+                } else {
+                    message.textContent = `Login failed. Try again. (${3 - attempts} attempts left)`;
+                    message.className = "message error";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

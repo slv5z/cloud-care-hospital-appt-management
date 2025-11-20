@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .menu-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 360px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            background-color: #4e73df;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2e59d9;
+        }
+
+        .exit {
+            background-color: #e74a3b;
+        }
+
+        .exit:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h1>🛡️ Admin Dashboard</h1>
+        <form method="POST" action="/admin_action">
+            <!-- Doctor Management -->
+            <button name="action" value="add_doctor">Add Doctor</button>
+            <button name="action" value="view_doctors">View Doctors</button>
+            <button name="action" value="search_doctors">Search Doctors</button>
+            <button name="action" value="edit_doctor">Edit Doctor Details</button>
+
+            <!-- Patient Management -->
+            <button name="action" value="add_patient">Add Patient</button>
+            <button name="action" value="view_patients">View Patients</button>
+            <button name="action" value="search_patients">Search Patients</button>
+            <button name="action" value="edit_patient">Edit Patient Details</button>
+
+            <!-- Appointment Management -->
+            <button name="action" value="book_appointment">Book Appointment</button>
+            <button name="action" value="view_appointments">View Appointments</button>
+            <button name="action" value="cancel_appointment">Cancel Appointment</button>
+            <button name="action" value="view_cancelled">View Cancelled Appointments</button>
+
+            <!-- Exit -->
+            <button class="exit" name="action" value="exit">Exit to Main Menu</button>
+        </form>
+    </div>
+</body>
+</html>
